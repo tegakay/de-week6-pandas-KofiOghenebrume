@@ -55,6 +55,7 @@ class ZentelETL:
         tickets_df["Response Seconds"] = (tickets_df["Ticket Resp Time"] - tickets_df["Ticket Open Time"]).dt.total_seconds()
         tickets_df["Response SLA Pass"] = np.where(tickets_df["Response Seconds"] < 10, True, False)
         tickets_df["Resolution Minutes"] = (tickets_df["Issue Res Time"] - tickets_df["Ticket Resp Time"]).dt.total_seconds() / 60
+        tickets_df["Resolution Seconds"] = (tickets_df["Issue Res Time"] - tickets_df["Ticket Resp Time"]).dt.total_seconds()
         tickets_df["Resolution SLA"] = tickets_df["Resolution Minutes"].apply(ZentelETL.get_sla_rating)
         tickets_df["Esclation Status"] = np.where(tickets_df["Resolution SLA"] == "Critical", 'Flagged', 'Normal')
         return tickets_df
@@ -87,6 +88,13 @@ class ZentelETL:
             
         
         return result
+    
+    def response_time_analysis(self,df: pd.DataFrame) -> pd.DataFrame:
+        """Analyze reasons for slow response times."""
+        slow_response_df = df[df["Response Seconds"] > 10]
+        reason_counts = slow_response_df["Fault Type"].value_counts().reset_index()
+        reason_counts.columns = ["Fault Type", "Count"]
+        return reason_counts
         
 
 # zentel = ZentelETL("data")

@@ -22,7 +22,7 @@ poetry shell
 poetry run zentel-pipeline
 
 ## Reports
-The top 5 operators are;
+# The top 5 operators 
    Operator  Resolution Minutes
 0      Akin         6986.250000
 4      Boye         7129.983333
@@ -30,10 +30,20 @@ The top 5 operators are;
 13    Kachi        10659.800000
 20  Popoola        11734.000000
 
-The bottom 5 operators are;
+# The bottom 5 operators 
     Operator  Resolution Minutes
 2      Atiku        50966.650000
 9     Habeeb        52324.683333
 3       Bola        53749.916667
 24  Sherifat        55008.166667
 11      John        55849.983333
+
+# Slow Response time reasons
+                 Fault Type  Count
+0             Customers End   2591
+1               Line damage    985
+2           Routine Service    519
+3          hardware failure    198
+4  Support network failures    130
+
+Steps should be taken on optimizing most frequent customer issues.

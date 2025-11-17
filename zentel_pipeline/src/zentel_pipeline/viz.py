@@ -1,6 +1,10 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from pathlib import Path
+
+data_dir = Path(__file__).parent.parent.parent /'reports'
+
 
 class ZentelViz:
     def __init__(self):
@@ -13,8 +17,9 @@ class ZentelViz:
         ax.set_title('Operator Resolution Time')
         ax.set_xlabel('Operator')
         ax.set_ylabel('Resolution Time (Mins)')
-        # ax.set_xticks(rotation=45, ha='right')
+        plt.xticks(rotation=45, ha='right')
         plt.tight_layout()
-        fig.savefig('operator_resolution_time.png')
+        file = data_dir/'operator_resolution_time.png'
+        fig.savefig(file)
         plt.close(fig)
 

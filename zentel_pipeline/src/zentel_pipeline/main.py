@@ -39,13 +39,17 @@ def main():
     # Generate Weekly KPI Report
     analysis.weekly_kpi_report(sla_df)
 
+    #Generate Reasons for slow response time report
+    response_time_df = zentel.response_time_analysis(sla_df)
+    logging.info("Reasons for Slow Response Time:")
+    print(response_time_df.head())
+
     # Generate Manager and Operator Performance Report
     manager_df = analysis.manager_operator_report(sla_df)
     logging.info("Operator Performance Report generated.")
     logging.info("The top 5 performers are:")
     print(manager_df.head())
-    # with open("df_head.txt", "w") as f:
-        # f.write(df.head().to_string())
+
 
     logging.info("The bottom 5 performers are:")
     print(manager_df.tail())
